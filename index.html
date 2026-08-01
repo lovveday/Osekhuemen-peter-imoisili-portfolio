@@ -1062,15 +1062,45 @@
   }
 
   // ── CONTACT FORM ──
-  function sendMessage() {
+  // ── CONTACT FORM ──
+  // NOTE: Replace YOUR_FORM_ID below with your real Formspree form ID (see setup steps in chat).
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mbdnvgdq';
+ 
+  async function sendMessage() {
     const name = document.getElementById('c-name').value.trim();
     const email = document.getElementById('c-email').value.trim();
+    const subject = document.getElementById('c-subject').value.trim();
     const msg = document.getElementById('c-msg').value.trim();
     if (!name || !email || !msg) { alert('Please fill in your name, email, and message.'); return; }
-    document.getElementById('success-msg').style.display = 'block';
-    document.querySelectorAll('#contact-form .form-input, #contact-form .form-textarea').forEach(el => el.value = '');
-    // In a real deployment, send this to a backend/email service
-    console.log('Contact form submitted:', { name, email, subject: document.getElementById('c-subject').value, msg });
+ 
+    const btn = document.querySelector('.contact-submit');
+    const originalText = btn.textContent;
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+ 
+    try {
+      const fd = new FormData();
+      fd.append('name', name);
+      fd.append('email', email);
+      fd.append('subject', subject);
+      fd.append('message', msg);
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: fd
+      });
+      if (res.ok) {
+        document.getElementById('success-msg').style.display = 'block';
+        document.querySelectorAll('#contact-form .form-input, #contact-form .form-textarea').forEach(el => el.value = '');
+      } else {
+        alert('Something went wrong sending your message — please try again or email me directly.');
+      }
+    } catch (err) {
+      alert('Something went wrong sending your message — please try again or email me directly.');
+    } finally {
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }
   }
 </script>
 </body>
