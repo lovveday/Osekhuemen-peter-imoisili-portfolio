@@ -937,6 +937,17 @@
   // ── PROJECT DATA ──
   let projects = [
     {
+      title: 'Credit Decision Engine',
+      category: 'engineering',
+      tag: 'Data Engineering',
+      desc: 'End-to-end credit decision system for the Nigerian lending context. Pairs a calibrated logistic regression model (AUC 0.745, Brier 0.069) with a rules engine reading bank statements and bureau reports to deliver explainable Approve, Refer, or Decline decisions with loan limits and tenures.',
+      tech: ['Python', 'Scikit-Learn', 'Machine Learning', 'Risk Analytics', 'Fintech'],
+      github: 'https://github.com/lovveday',
+      demo: 'mailto:osekhuemenpeterimoisili4@gmail.com?subject=Credit%20Decision%20Engine%20Demo%20Access',
+      demoLabel: 'Request Demo',
+      metric: '0.745 AUC'
+    },
+    {
       title: 'Baby Names Analytics Dashboard',
       category: 'analytics',
       tag: 'Data Analytics',
@@ -961,7 +972,7 @@
       category: 'engineering',
       tag: 'Data Engineering',
       desc: 'Automated ETL pipeline that pulls live match, team, and player stats from the API-Football API and writes them into a structured Excel workbook. Scheduled via GitHub Actions cron jobs twice daily, with rate-limit-aware logic to stay inside the free API tier.',
-      tech: ['Python', 'GitHub Actions', 'REST API', 'Excel', 'Power BI',],
+      tech: ['Python', 'GitHub Actions', 'REST API', 'Excel', 'Power BI'],
       github: 'https://github.com/lovveday/wc2026-tracker',
       demo: null,
       metric: '2x/day'
@@ -988,8 +999,8 @@
     },
     {
       title: 'Jumia Television Market Analysis',
-      category: 'Engineering',
-      tag: 'DATA ENGINEERING',
+      category: 'engineering',
+      tag: 'Data Engineering',
       desc: 'Jupyter Notebook-based market analysis of television product listings on Jumia — pricing, brand, and category trends. Dashboard build in progress.',
       tech: ['Python', 'Jupyter', 'Pandas', 'BeautifulSoup', 'SQL', 'Power BI'],
       github: 'https://github.com/lovveday/Jumia-television-market-analysis-dashboard',
@@ -1010,7 +1021,7 @@
         <div class="project-tech">${p.tech.map(t => `<span class="tech-badge">${t}</span>`).join('')}</div>
         <div class="project-links">
           ${p.github ? `<a href="${p.github}" target="_blank">GitHub</a>` : ''}
-          ${p.demo ? `<a href="${p.demo}" target="_blank">Live Demo</a>` : ''}
+          ${p.demo ? `<a href="${p.demo}" target="_blank">${p.demoLabel || 'Live Demo'}</a>` : ''}
         </div>
       </div>
     `).join('');
@@ -1062,8 +1073,6 @@
   }
 
   // ── CONTACT FORM ──
-  // ── CONTACT FORM ──
-  // NOTE: Replace YOUR_FORM_ID below with your real Formspree form ID (see setup steps in chat).
   const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mbdnvgdq';
  
   async function sendMessage() {
